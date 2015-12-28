@@ -1,6 +1,6 @@
 # voting-method-http-api
 
-TODO: Add description
+HTTP API gateway for voting methods.
 
 ## Configuration
 
