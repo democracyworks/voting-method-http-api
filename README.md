@@ -24,10 +24,12 @@ To find the ways in which a resident of a state may typically vote there, send
 a GET request to the `/:state` endpoint with any 2-letter state postal
 abbreviation (case insensitive).
 
-On success it will respond with something like:
+On success it will respond with a set of maps like this (exact contents will
+vary by state):
 
 ```clojure
-{:[type] {...}}
+#{{:type :in-person, :primary true, :other-key "state-specific details"}
+  {:type :by-mail, :primary false, excuse-required true, ...}}
 ```
 
 ### User voting-method preferences
