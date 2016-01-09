@@ -30,7 +30,7 @@
                               connection
                               ""
                               "voting-method-works.voting-method-preference.read"
-                              (config [:rabbitmq :queues "voting-method-works.voting-methods.search"])
+                              (config [:rabbitmq :queues "voting-method-works.voting-method-preference.read"])
                               5000
                               channels/voting-method-preference-read)
                              (wire-up/external-service
