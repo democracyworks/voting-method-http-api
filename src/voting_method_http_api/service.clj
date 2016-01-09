@@ -40,9 +40,8 @@
                  channels/voting-method-preference-delete)]}
       ^:interceptors [(bifrost.i/update-in-request [:path-params :user-id]
                                                    #(java.util.UUID/fromString %))]]
-     ["/:state" {:get [:voting-methods-search
-                       (bifrost/interceptor
-                        channels/voting-methods-search)]}
+     ["/:state" {:get [:voting-method-search
+                       (bifrost/interceptor channels/voting-method-search)]}
       ^:interceptors [(bifrost.i/update-in-response [:body :voting-methods]
                                                     [:body] identity)]]]]])
 
