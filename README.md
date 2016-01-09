@@ -4,8 +4,6 @@ HTTP API gateway for voting methods.
 
 ## Configuration
 
-TODO: Add voting-method-http-api specific configuration.
-
 * ALLOWED_ORIGINS
     * This env var controls the cross-origin resource sharing (CORS) settings.
     * It should be set to one of the following:
@@ -20,7 +18,61 @@ TODO: Add voting-method-http-api specific configuration.
 
 ## Usage
 
-TODO: Add usage
+### State voting-methods
+
+To find the ways in which a resident of a state may typically vote there, send
+a GET request to the `/:state` endpoint with any 2-letter state postal
+abbreviation (case insensitive).
+
+On success it will respond with a set of maps like this (exact contents will
+vary by state):
+
+```clojure
+#{{:type :in-person, :primary true, :other-key "state-specific details"}
+  {:type :by-mail, :primary false, excuse-required true, ...}}
+```
+
+### User voting-method preferences
+
+#### Create
+
+To store users' voting-method preference (how they typically prefer to vote),
+send a PUT request to the `/preference/:user-id` endpoint and a body like:
+
+```clojure
+{:preference :by-mail} ; or :in-person
+```
+
+On success it will respond with a 201 response like:
+
+```clojure
+{:user-id #uuid "..."
+ :preference :by-mail}
+```
+
+These will upsert based on the `:user-id`.
+
+#### Read
+
+To read one back out, send a GET request to the `/preference/:user-id` endpoint.
+
+On success it will respond with a 200 response like:
+
+```clojure
+{:user-id #uuid "..."
+ :preference :by-mail} ; or :in-person
+```
+
+#### Delete
+
+To delete a preference, send a DELETE request to the
+`/preference/:user-id` endpoint.
+
+On success it will respond with a 200 response like:
+
+```clojure
+{:status :ok}
+```
 
 ## Running
 

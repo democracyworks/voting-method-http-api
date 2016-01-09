@@ -1,0 +1,34 @@
+api:
+  build: .
+  links:
+    - rabbitmq
+    - wildfly
+  environment:
+    ALLOWED_ORIGINS: :all
+works:
+  build: ../voting-method-works
+  links:
+    - rabbitmq
+    - wildfly
+    - datomic
+  environment:
+    DATOMIC_URI: "datomic:dev://datomic:4334/voting-method-works"
+wildfly:
+  image: quay.io/democracyworks/wildfly:9.0.2.Final-debug
+  links:
+    - rabbitmq
+    - datomic
+  ports:
+    - "59990:9990"
+    - "58080:8080"
+  environment:
+    ADMIN_USERNAME: admin
+    ADMIN_PASSWORD: admin
+rabbitmq:
+  image: rabbitmq:3.5.3-management
+  ports:
+    - "45672:5672"
+    - "55672:15672"
+  hostname: rabbitmq
+datomic:
+  image: quay.io/democracyworks/datomic-tx:0.9.5327
