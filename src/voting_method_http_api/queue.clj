@@ -22,10 +22,10 @@
           external-services [(wire-up/external-service
                               connection
                               ""
-                              "voting-method-works.voting-methods.search"
-                              (config [:rabbitmq :queues "voting-method-works.voting-methods.search"])
+                              "voting-method-works.voting-method.search"
+                              (config [:rabbitmq :queues "voting-method-works.voting-method.search"])
                               5000
-                              channels/voting-methods-search)
+                              channels/voting-method-search)
                              (wire-up/external-service
                               connection
                               ""

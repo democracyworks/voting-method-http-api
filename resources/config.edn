@@ -4,7 +4,7 @@
  :rabbitmq {:connection {:host #resource-config/env "RABBITMQ_PORT_5672_TCP_ADDR"
                          :port #resource-config/edn #resource-config/env "RABBITMQ_PORT_5672_TCP_PORT"}
             :queues {"voting-method-http-api.ok" {:exclusive false :durable true :auto-delete false}
-                     "voting-method-works.voting-methods.search" {:exclusive false :durable true :auto-delete false}
+                     "voting-method-works.voting-method.search" {:exclusive false :durable true :auto-delete false}
                      "voting-method-works.voting-method-preference.read" {:exclusive false :durable true :auto-delete false}
                      "voting-method-works.voting-method-preference.create" {:exclusive false :durable true :auto-delete false}
                      "voting-method-works.voting-method-preference.delete" {:exclusive false :durable true :auto-delete false}}}}
