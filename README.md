@@ -90,8 +90,6 @@ Run it:
 > docker-compose up
 ```
 
-TODO: If any more env vars are needed, add them to docker-compose command above.
-
 ### Running in CoreOS
 
 There is a voting-method-http-api@.service.template file provided in the repo. Look
