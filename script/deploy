@@ -35,6 +35,7 @@ if [[ -n ${DEPLOY_ENV} ]]; then
   IMAGE_TAG=$(grep "Environment=VERSION=" ${SERVICE}@.service | cut -f 3 -d =)
   DOCKER_IMAGE="${DOCKER_REPO}:${IMAGE_TAG}"
   echo "--- tagging and pushing ${DOCKER_REPO}:${DEPLOY_ENV}"
+  docker pull ${DOCKER_IMAGE} # in case it isn't on this host yet
   docker tag ${DOCKER_IMAGE} ${DOCKER_REPO}:${DEPLOY_ENV}
   docker push ${DOCKER_REPO}:${DEPLOY_ENV}
 fi
