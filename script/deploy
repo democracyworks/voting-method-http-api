@@ -25,9 +25,11 @@ fleetctl submit ${SERVICE}@.service
 
 echo '--- (re-)starting fleet service instances'
 for i in {1..3}; do
+  fleetctl stop ${SERVICE}@$i
   fleetctl destroy ${SERVICE}@$i || true # may not exist
   fleetctl start ${SERVICE}@$i
   # TODO: Use consul to see if ${SERVICE}@$i is healthy yet before moving on
+  sleep 30
 done
 
 if [[ -n ${DEPLOY_ENV} ]]; then
