@@ -38,7 +38,7 @@
                               ""
                               "voting-method-works.voting-method-preference.create"
                               (config [:rabbitmq :queues "voting-method-works.voting-method-preference.create"])
-                              5000
+                              10000
                               channels/voting-method-preference-create)
                              (wire-up/external-service
                               connection
