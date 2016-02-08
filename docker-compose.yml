@@ -4,7 +4,7 @@ api:
     - rabbitmq
     - wildfly
   environment:
-    ALLOWED_ORIGINS: :all
+    ALLOWED_ORIGINS: '[".*"]'
 works:
   build: ../voting-method-works
   links:
