@@ -24,14 +24,14 @@
                               ""
                               "voting-method-works.voting-method.search"
                               (config [:rabbitmq :queues "voting-method-works.voting-method.search"])
-                              5000
+                              10000
                               channels/voting-method-search)
                              (wire-up/external-service
                               connection
                               ""
                               "voting-method-works.voting-method-preference.read"
                               (config [:rabbitmq :queues "voting-method-works.voting-method-preference.read"])
-                              5000
+                              10000
                               channels/voting-method-preference-read)
                              (wire-up/external-service
                               connection
@@ -45,7 +45,7 @@
                               ""
                               "voting-method-works.voting-method-preference.delete"
                               (config [:rabbitmq :queues "voting-method-works.voting-method-preference.delete"])
-                              5000
+                              10000
                               channels/voting-method-preference-delete)]
           outgoing-events []]
 
