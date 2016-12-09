@@ -1,13 +1,17 @@
-FROM quay.io/democracyworks/didor:latest
+FROM clojure:lein-2.7.1-alpine
 
 RUN mkdir -p /usr/src/voting-method-http-api
 WORKDIR /usr/src/voting-method-http-api
 
 COPY project.clj /usr/src/voting-method-http-api/
 
-RUN lein deps
+ARG env=production
+
+RUN lein with-profile $env deps
 
 COPY . /usr/src/voting-method-http-api
 
-RUN lein test
-RUN lein immutant war --name voting-method-http-api --destination target --nrepl-port=11954 --nrepl-start --nrepl-host=0.0.0.0
+RUN lein with-profiles $env,test test
+RUN lein with-profile $env uberjar
+
+CMD ["java", "-jar", "target/voting-method-http-api.jar"]
