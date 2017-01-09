@@ -3,8 +3,27 @@
           :allowed-origins #resource-config/edn #resource-config/env "ALLOWED_ORIGINS"}
  :rabbitmq {:connection {:host #resource-config/env "RABBITMQ_PORT_5672_TCP_ADDR"
                          :port #resource-config/edn #resource-config/env "RABBITMQ_PORT_5672_TCP_PORT"}
-            :queues {"voting-method-http-api.ok" {:exclusive false :durable true :auto-delete false}
-                     "voting-method-works.voting-method.search" {:exclusive false :durable true :auto-delete false}
-                     "voting-method-works.voting-method-preference.read" {:exclusive false :durable true :auto-delete false}
-                     "voting-method-works.voting-method-preference.create" {:exclusive false :durable true :auto-delete false}
-                     "voting-method-works.voting-method-preference.delete" {:exclusive false :durable true :auto-delete false}}}}
+            :kehaar {:incoming-services
+                     [{:queue "voting-method-http-api.ok"
+                       :f voting-method-http-api.handlers/ok
+                       :response true
+                       :threads 2
+                       :prefetch-limit 2}]
+
+                     :external-services
+                     [{:queue "voting-method-works.voting-method.search"
+                       :channel voting-method-http-api.channels/voting-method-search
+                       :response true
+                       :timeout 10000}
+                      {:queue "voting-method-works.voting-method-preference.read"
+                       :channel voting-method-http-api.channels/voting-method-preference-read
+                       :response true
+                       :timeout 10000}
+                      {:queue "voting-method-works.voting-method-preference.create"
+                       :channel voting-method-http-api.channels/voting-method-preference-create
+                       :response true
+                       :timeout 10000}
+                      {:queue "voting-method-works.voting-method-preference.delete"
+                       :channel voting-method-http-api.channels/voting-method-preference-delete
+                       :response true
+                       :timeout 10000}]}}}
